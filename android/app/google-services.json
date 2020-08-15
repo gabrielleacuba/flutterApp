@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "71550453402",
+    "firebase_url": "https://restaurante-b653d.firebaseio.com",
+    "project_id": "restaurante-b653d",
+    "storage_bucket": "restaurante-b653d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71550453402:android:8f8a982c9a8c31c1804123",
+        "android_client_info": {
+          "package_name": "com.example.App0Flutter_GabrielleAlmeidaCuba"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "71550453402-32d3i7aceco7j07hn9ropq0oot76a8hn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.App0Flutter_GabrielleAlmeidaCuba",
+            "certificate_hash": "30526423d7161328ad2ccbd30caa74bb85a7eb58"
+          }
+        },
+        {
+          "client_id": "71550453402-pdpqap7b03e6je5ehbo09sipbtgrrap6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9WoPc86twadXZEP2DH6a8sxLU3PCJiiE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "71550453402-pdpqap7b03e6je5ehbo09sipbtgrrap6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
