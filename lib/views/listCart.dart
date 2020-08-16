@@ -34,34 +34,56 @@ class _State extends State<ListaCart> {
         .snapshots();
 
     return Scaffold(
-      body: StreamBuilder<QuerySnapshot>(
-        stream: snapshots,
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError)
-            return Center(child: Text('Error: ${snapshot.error}'));
+      body: FutureBuilder(
+        future: FirebaseAuth.instance.currentUser(),
+        //future: FirebaseAuth.instance.currentUser(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return
+            /* 
+            Center(
+              child: Text(snapshot.data.uid),
+            );*/
+            StreamBuilder<QuerySnapshot>(
+              
+              stream: Firestore.instance
+                      .collection('Carrinho')
+                      .where('ID', isEqualTo: snapshot.data.uid)
+                      .snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError)
+                  return Center(child: Text('Error: ${snapshot.error}'));
 
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+
+                return ListView.builder(
+                  itemCount: snapshot.data.documents.length,
+                  itemBuilder: (BuildContext context, int i) {
+                    var item = snapshot.data.documents[i];
+
+                    return Card(
+                      margin: const EdgeInsets.all(10.0),
+                      child: ListTile(
+                        //isThreeLine: true,
+                        leading: CircleAvatar(
+                            child: Image.asset('images/IconeTeste.png')),
+                        title: Text(item['nome']),
+                        subtitle: Text(item['descricao'].toString()),
+                        trailing: Text(item['quantidade'].toString()),
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           }
-
-          return ListView.builder(
-            itemCount: snapshot.data.documents.length,
-            itemBuilder: (BuildContext context, int i) {
-              var item = snapshot.data.documents[i];
-
-              return Card(
-                margin: const EdgeInsets.all(10.0),
-                child: ListTile(
-                  //isThreeLine: true,
-                  leading:
-                      CircleAvatar(child: Image.asset('images/IconeTeste.png')),
-                  title: Text(item['nome']),
-                  subtitle: Text(item['descricao'].toString()),
-                  trailing: Text(item['quantidade'].toString()),
-                ),
-              );
-            },
-          );
         },
       ),
     );
